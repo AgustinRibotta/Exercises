@@ -1,3 +1,5 @@
+import java.util.stream.LongStream;
+
 public class ExercisesOneTen {
     // 1. Check if a number is prime
     // Write a program that determines whether a given number is prime or not.
@@ -27,6 +29,42 @@ public class ExercisesOneTen {
     // 3. Calculate factorial (recursive and functional)
     // Implement the factorial of a number in two ways:
     // using recursion and using functional programming (Streams).
+
+    public static void factorialRecursive(long n) {
+        if (n < 0) {
+            System.out.println("Error: number must be non-negative.");
+            return;
+        }
+
+        long result = factorialRec(n);
+        System.out.println("Recursive factorial of " + n + " = " + result);
+    }
+
+    private static long factorialRec(long n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        return n * factorialRec(n - 1);
+    }
+
+    public static void factorialFunctional(long n) {
+        if (n < 0) {
+            System.out.println("Error: number must be non-negative.");
+            return;
+        }
+
+        long result = LongStream.rangeClosed(1, n)
+                .reduce(1, (a, b) -> a * b);
+
+        System.out.println("Functional factorial of " + n + " = " + result);
+    }
+
+    public static void main(String[] args) {
+        int number = 5;
+
+        factorialRecursive(number);
+        factorialFunctional(number);
+    }
 
     // 4. Count vowels in a string
     // Given a text, count how many vowels it contains (uppercase and lowercase).
